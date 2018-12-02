@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 import com.example.julio.management.ConectionServer;
-import com.example.julio.proyectoso_v2.R;
+
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;

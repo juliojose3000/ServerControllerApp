@@ -14,7 +14,7 @@ import android.widget.ListView;
 import com.example.julio.activities.gerencial.AddServer;
 import com.example.julio.management.ConnectionDataBaseSQLServer;
 import com.example.julio.objects.Server;
-import com.example.julio.proyectoso_v2.R;
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 import java.util.ArrayList;
 
