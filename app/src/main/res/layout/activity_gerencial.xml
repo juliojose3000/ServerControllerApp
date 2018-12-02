@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.julio.activities.gerencial.Gerencial"
+    tools:layout_editor_absoluteY="73dp"
+    android:background="@drawable/background_gerencial">
+
+
+    <Button
+        android:id="@+id/button_listFiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:onClick="seeFiles"
+        android:text="Archivos"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_process"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:onClick="seeProcess"
+        android:text="Procesos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listview_servers" />
+
+    <ListView
+        android:id="@+id/listview_servers"
+        android:layout_width="0dp"
+        android:layout_height="233dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginRight="49dp"
+        android:layout_marginStart="49dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="219dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:text="Bienvenido gerente"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Sus servidores:"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/listview_servers"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_editServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:onClick="editServer"
+        android:text="Editar"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_process"
+        app:layout_constraintStart_toEndOf="@+id/button_process" />
+</android.support.constraint.ConstraintLayout>

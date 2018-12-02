@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gerencial"
+    tools:context="com.example.julio.activities.gerencial.ListServerFiles"
+    tools:layout_editor_absoluteY="73dp">
+
+    <ListView
+        android:id="@+id/listaFiles"
+        android:layout_width="323dp"
+        android:layout_height="272dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/button_killProcess"
+        android:layout_width="152dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginStart="31dp"
+        android:onClick="deleteFile"
+        android:text="Borrar archivo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_seePermitsFile"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_seePermitsFile"
+        android:layout_width="152dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginStart="11dp"
+        android:onClick="seePermitsFile"
+        android:text="Ver permisos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_killProcess" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="307dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="29dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
+        android:text="Files"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/listaFiles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

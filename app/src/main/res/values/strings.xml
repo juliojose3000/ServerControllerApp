@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">ServerController</string>
+    <string name="app_name">DinoStatus</string>
+    <string name="login_boton">Login</string>
+    <string name="textview_username">Username</string>
+    <string name="textview_password">Password</string>
+    <string name="listProcess">Process list:</string>
+    <string name="foldersServ">Folders Server:</string>
+    <string name="foldersApp">Folders App:</string>
+    <string name="buttonAccept">Aceptar</string>
+    <string name="buttonCancel">Cancelar</string>
+    <string name="redTraffic">Transito de red</string>
+    <string name="redTrafficMbs">5 Mbps</string>
+    <string name="aplicationFiles">Archivos de aplicacion</string>
+    <string name="tickets">Tickets</string>
 </resources>

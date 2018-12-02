@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gerencial"
+    tools:context="com.example.julio.activities.gerencial.ChangePermissionsFiles"
+    tools:layout_editor_absoluteY="73dp">
+
+    <CheckBox
+        android:id="@+id/checkbox_groupRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickOnCheckBox"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_groupExecute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_groupExecute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickOnCheckBox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_groupRead"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_userExecute" />
+
+    <CheckBox
+        android:id="@+id/checkBox_groupWrite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickOnCheckBox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_groupExecute"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_groupExecute" />
+
+    <CheckBox
+        android:id="@+id/checkbox_worldRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickOnCheckBox"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_worldExecute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_worldExecute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:onClick="clickOnCheckBox"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="49dp"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_worldRead"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_groupExecute" />
+
+    <CheckBox
+        android:id="@+id/checkBox_worldWrite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:onClick="clickOnCheckBox"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_worldExecute"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_worldExecute" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:text="Usuario:"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkbox_userRead"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:text="Grupo:"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkbox_groupRead"
+        app:layout_constraintEnd_toEndOf="@+id/textView14"
+        app:layout_constraintStart_toStartOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginStart="47dp"
+        android:text="Mundo:"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkbox_worldRead"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkbox_userRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickOnCheckBox"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_userExecute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_userExecute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:onClick="clickOnCheckBox"
+        android:layout_marginTop="21dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <CheckBox
+        android:id="@+id/checkBox_userWrite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickOnCheckBox"
+        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox_userExecute"
+        app:layout_constraintStart_toStartOf="@+id/textView17" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="33dp"
+        android:layout_height="21dp"
+        android:text="Leer"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="137dp"
+        android:text="Ejecutar"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:text="Escribir"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
+        app:layout_constraintStart_toEndOf="@+id/textView16" />
+
+    <Button
+        android:id="@+id/button_applyChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginRight="138dp"
+        android:onClick="changePermits"
+        android:text="Aplicar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:text="Permisos del archivo"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
