@@ -16,6 +16,7 @@ import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 public class MainActivity extends AppCompatActivity {
 
     //Comentario de prueba
+    //SSSIIIIIIIIIIIIIIIIIIIIIIIIIUUUUUUUUU  
     EditText username;
 
     EditText password;
