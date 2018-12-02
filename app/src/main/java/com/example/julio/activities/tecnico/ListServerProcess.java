@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.julio.management.ConectionServer;
 import com.example.julio.management.CreateConnection;
-import com.example.julio.proyectoso_v2.R;
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.julio.management.ConectionServer;
-import com.example.julio.proyectoso_v2.R;
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;

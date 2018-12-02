@@ -11,7 +11,7 @@ import com.example.julio.activities.gerencial.Gerencial;
 import com.example.julio.activities.sysadmin.SysAdmin;
 import com.example.julio.activities.tecnico.Tecnico;
 import com.example.julio.management.ConnectionDataBaseSQLServer;
-import com.example.julio.proyectoso_v2.R;
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 public class MainActivity extends AppCompatActivity {
 
