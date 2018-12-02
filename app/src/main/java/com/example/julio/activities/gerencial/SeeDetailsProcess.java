@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.julio.management.ConectionServer;
-import com.example.julio.proyectoso_v2.R;
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 import java.util.concurrent.ExecutionException;
 
 public class SeeDetailsProcess extends AppCompatActivity {

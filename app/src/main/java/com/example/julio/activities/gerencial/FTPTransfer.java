@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.julio.management.FTPConnection;
-import com.example.julio.proyectoso_v2.R;
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 import java.io.File;
 import java.util.ArrayList;
