@@ -1,4 +1,7 @@
 package com.example.julio.activities.gerencial;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +14,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.example.julio.management.ConnectionDataBaseSQLServer;
+import com.example.julio.management.ShowNotifications;
 import com.example.julio.objects.Server;
 import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 import java.util.ArrayList;
+
+import javax.crypto.ShortBufferException;
 
 public class Gerencial extends AppCompatActivity {
 
@@ -155,8 +161,26 @@ public class Gerencial extends AppCompatActivity {
 
     public void executeCommands(View v){
 
+        ShowNotifications showNotifications = new ShowNotifications();
+        showNotifications.execute();
 
     }
+
+    public void ShowNotifications(){
+        String tittle="";
+        String subject="Saturacion de memoria";
+        String body="Se ha llegado al limite de la memoria";
+
+        NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Notification notification = new Notification.Builder(getApplicationContext())
+                .setContentTitle(subject).setContentText(body)
+                .setSmallIcon(R.drawable.ic_launcher_background).getNotification();
+
+        notification.flags |= notification.FLAG_AUTO_CANCEL;
+        notif.notify(0, notification);
+    }
+
 
 
 
