@@ -15,13 +15,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.MainActivity">
+        <activity android:name="com.example.julio.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.example.julio.activities.gerencial.Gerencial" />
+        <activity android:name="com.example.julio.activities.tecnico.Tecnico" />
+        <activity android:name="com.example.julio.activities.sysadmin.SysAdmin" />
+        <activity android:name="com.example.julio.activities.gerencial.AddServer" />
+        <activity android:name="com.example.julio.activities.gerencial.ListServerFiles" />
+        <activity android:name="com.example.julio.activities.gerencial.ListServerProcess" />
+        <activity android:name="com.example.julio.activities.gerencial.SeeDetailsProcess" />
+        <activity android:name="com.example.julio.activities.gerencial.EditServers" />
+        <activity android:name="com.example.julio.activities.sysadmin.ListServerFiles" />
+        <activity android:name="com.example.julio.activities.sysadmin.ListServerProcess" />
+        <activity android:name="com.example.julio.activities.sysadmin.SeeDetailsProcess" />
+        <activity android:name="com.example.julio.activities.tecnico.ListServerFiles" />
+        <activity android:name="com.example.julio.activities.tecnico.ListServerProcess" />
+        <activity android:name="com.example.julio.activities.tecnico.SeeDetailsProcess" />
+        <activity android:name="com.example.julio.activities.gerencial.ChangePermissionsFiles" />
+        <activity android:name="com.example.julio.activities.gerencial.FTPTransfer"></activity>
+
 
     </application>
 

@@ -10,4 +10,12 @@
         android:id="@+id/item_ftp_transfer"
         android:title="Transferencia en FTP" />
 
+    <item
+        android:id="@+id/item_async_task"
+        android:title="Tarea en segundo plano" />
+
+    <item
+        android:id="@+id/item_show_notifications"
+        android:title="Mostrar norificacion" />
+
 </menu>

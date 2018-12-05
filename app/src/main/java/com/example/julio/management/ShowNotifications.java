@@ -1,5 +1,8 @@
-package com.example.julio.management;
+/*package com.example.julio.management;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.julio.activities.gerencial.Gerencial;
@@ -7,121 +10,149 @@ import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
 public class ShowNotifications extends AsyncTask<String, Void, Void> {
 
     private ArrayList<String> lista1 = new ArrayList<>();
 
-    private ArrayList<String> lista0 = new ArrayList<>();
-
-    ConnectServerUbuntu connectServerUbuntu;
-
-    private String username;
-
-    private String password;
-
-    private int port;
-
-    private String ip;
-
     private Session session;
 
-    Gerencial gerencial = new Gerencial();
+    private Context mComtext;
+
+    public void setContext(Context mComtext){
+        this.mComtext = mComtext;
+    }
 
 
     @Override
     protected Void doInBackground(String... params) {
 
-        String command =  params[0]; // enter any command you need to execute
-        String userServer =  params[1]; // enter any command you need to execute
-        String ipServer =  params[2]; // enter any command you need to execute
-        int portServer =  Integer.parseInt(params[3]); // enter any command you need to execute
-        String password = params[4];
-
         while(true){
 
-            try {
-                JSch jsch = new JSch();
+            connectWithServerUbuntu(params);
 
-                String host = userServer+"@"+ipServer;// enter username and ipaddress for machine you need to connect
+            System.out.println("Hola a todos");
 
-                String user = host.substring(0, host.indexOf('@'));
-                host = host.substring(host.indexOf('@') + 1);
+            try{Thread.sleep(5000);}catch(Exception ee){}
 
-                session = jsch.getSession(user, host, portServer);
+            getPercentMemory();
 
-                // username and password will be given via UserInfo interface.
-                MyUserInfo ui = new MyUserInfo();
-                ui.setPasswd(password);
-                session.setUserInfo(ui);
-                session.connect();
+        }//fin del ciclo infinito
 
-                Channel canalServidor=session.openChannel("exec");
-                ((ChannelExec)canalServidor).setCommand(command);
+    }
 
-                canalServidor.setInputStream(null);
 
-                ((ChannelExec)canalServidor).setErrStream(System.err);
+    private void connectWithServerUbuntu(String[] params){
+        String userServer =  params[0]; // enter any command you need to execute
+        String ipServer =  params[1]; // enter any command you need to execute
+        int portServer =  Integer.parseInt(params[2]); // enter any command you need to execute
+        String password = params[3];
 
-                InputStream informacionDelServidor =canalServidor.getInputStream();
+        try {
+            JSch jsch = new JSch();
 
-                canalServidor.connect();
+            String host = userServer+"@"+ipServer;// enter username and ipaddress for machine you need to connect
 
-                byte[] arregloBytes=new byte[1024];
-                while(true){
-                    while (true) {
-                        while (informacionDelServidor.available() > 0) {
-                            int i = informacionDelServidor.read(arregloBytes, 0, 1024);
-                            if (i < 0) {
-                                break;
-                            }
-                            //meto el resultado de la ejecucion del comando en text
-                            String text = new String(arregloBytes, 0, i);
-                            String[] rowsText = text.split("\n");
-                            //este for lo que hace es omiter el encabezado de las consultas que lo tienen
-                            for (int j = 1; j<rowsText.length; j++) {
-                                lista1.add(rowsText[j]);
-                            }
-                            //cuando no hay encabezado, se usa este otro ciclo que tome desde la fina uno de resultados
-                            for (int j = 0; j<rowsText.length; j++) {
-                                lista0.add(rowsText[j]);
-                            }
+            String user = host.substring(0, host.indexOf('@'));
+            host = host.substring(host.indexOf('@') + 1);
 
-                            if(1>0){
-                                gerencial.ShowNotifications();
-                            }
+            session = jsch.getSession(user, host, portServer);
 
-                        }
-                        if (canalServidor.isClosed()) {
-                            System.out.println("exit-status: " + canalServidor.getExitStatus());
+            // username and password will be given via UserInfo interface.
+            MyUserInfo ui = new MyUserInfo();
+            ui.setPasswd(password);
+            session.setUserInfo(ui);
+            session.connect();
+
+            Channel canalServidor=session.openChannel("exec");
+            ((ChannelExec)canalServidor).setCommand("free -m -h");
+
+            canalServidor.setInputStream(null);
+
+            ((ChannelExec)canalServidor).setErrStream(System.err);
+
+            InputStream informacionDelServidor =canalServidor.getInputStream();
+
+            canalServidor.connect();
+
+            byte[] arregloBytes=new byte[1024];
+            while(true){
+                while (true) {
+                    while (informacionDelServidor.available() > 0) {
+                        int i = informacionDelServidor.read(arregloBytes, 0, 1024);
+                        if (i < 0) {
                             break;
                         }
-                        try {
-                            Thread.sleep(1000);
-                        } catch (Exception ee) {
+                        //meto el resultado de la ejecucion del comando en text
+                        String text = new String(arregloBytes, 0, i);
+                        String[] rowsText = text.split("\n");
+                        //este for lo que hace es omiter el encabezado de las consultas que lo tienen
+                        for (int j = 1; j<2; j++) {
+                            lista1.add(rowsText[j]);
                         }
-
-
                     }
-                    if(canalServidor.isClosed()){
-                        System.out.println("exit-status: "+canalServidor.getExitStatus());
+                    if (canalServidor.isClosed()) {
+                        System.out.println("exit-status: " + canalServidor.getExitStatus());
                         break;
                     }
-                    try{Thread.sleep(1000);}catch(Exception ee){}
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception ee) {
+                    }
+
+
                 }
-                canalServidor.disconnect();
-                session.disconnect();
-
-
-            } catch (Exception e) {
-
+                if(canalServidor.isClosed()){
+                    System.out.println("exit-status: "+canalServidor.getExitStatus());
+                    break;
+                }
+                try{Thread.sleep(1000);}catch(Exception ee){}
             }
+            canalServidor.disconnect();
+            session.disconnect();
 
-            return null;
+
+        } catch (Exception e) {
 
         }
 
     }
+
+    private void getPercentMemory(){
+        String[] rowParts=null;
+        for(String row: lista1){
+            rowParts = row.split("\\s+");
+        }
+
+        double avaibleMemory = isInMB(rowParts[6]);
+
+        if(avaibleMemory<800){
+
+        }
+
+
+    }
+
+    private double isInMB(String data){
+
+        double x = Double.parseDouble(data.substring(0, data.length()-1));
+
+        if(data.charAt(data.length()-1)=='G'){
+
+            return x*1024;
+
+        }else{
+
+            return x;
+
+        }
+
+    }
+
 }
+*/
