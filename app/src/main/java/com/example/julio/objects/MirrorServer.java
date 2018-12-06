@@ -1,6 +1,6 @@
 package com.example.julio.objects;
 
-public class Server2 {
+public class MirrorServer {
 
     private int idServer;
 
@@ -14,11 +14,11 @@ public class Server2 {
 
     private String ip;
 
-    public Server2(){
+    public MirrorServer(){
 
     }
 
-    public Server2(int idServer, String serverName,String username, String password, int port, String ip) {
+    public MirrorServer(int idServer, String serverName, String username, String password, int port, String ip) {
         this.idServer=idServer;
         this.serverName=serverName;
         this.username = username;

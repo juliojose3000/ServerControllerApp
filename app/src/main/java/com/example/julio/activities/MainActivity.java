@@ -16,10 +16,11 @@ import com.example.julio.activities.tecnico.Tecnico;
 import com.example.julio.management.ConnectionDataBaseSQLServer;
 import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
+//Comentario de prueba
+//comentario de juan XD
+
 public class MainActivity extends AppCompatActivity {
 
-    //Comentario de prueba
-    //SSSIIIIIIIIIIIIIIIIIIIIIIIIIUUUUUUUUU  
     EditText username;
 
     EditText password;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         String password = "'"+this.password.getText().toString()+"'";
 
         connectionDataBaseSQLServer = new ConnectionDataBaseSQLServer();
+
+        if(connectionDataBaseSQLServer.getNotification()!=null){
+            Toast.makeText(this, connectionDataBaseSQLServer.getNotification(), Toast.LENGTH_LONG).show();
+        }
 
         String rolName = connectionDataBaseSQLServer.verifyUserInBD(username, password);
 
