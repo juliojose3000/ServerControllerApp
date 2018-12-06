@@ -77,7 +77,10 @@ public class ListServerFiles extends AppCompatActivity {
             //divido cada fila del resultado en sus diferentes partes (permisos, dueno,
             String[] fileName = list.get(j).split("\\s+|\n");
             //agrego a la lista solo el nombre del los archivos
-            listaNombreFiles.add(fileName[8]);
+            if(fileName.length>4){
+                listaNombreFiles.add(fileName[fileName.length-1]);
+            }
+
 
         }
     }
@@ -142,6 +145,8 @@ public class ListServerFiles extends AppCompatActivity {
     public void showError(){
         if(listaNombreFiles.size()==0){
             Toast.makeText(this,"Error al conectar con el servidor "+ip,Toast.LENGTH_LONG).show();
+        }else if(connectionServer.getNotification()!=null){
+            Toast.makeText(this,connectionServer.getNotification(),Toast.LENGTH_LONG).show();
         }
 
     }

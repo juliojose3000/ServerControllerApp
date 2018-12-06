@@ -2,6 +2,7 @@ package com.example.julio.management;
 
 import com.example.julio.objects.Audit;
 import com.example.julio.objects.Command;
+import com.example.julio.objects.MirrorServer;
 import com.example.julio.objects.Rol;
 import com.example.julio.objects.Server;
 import com.example.julio.objects.User;
@@ -18,21 +19,30 @@ public class ConnectionDataBaseSQLServer {
 
     private String dataBaseName = "AndroidAppJ";
 
-    CreateConnection connectionDataBaseSQLServer;
+    private CreateConnection connectionDataBaseSQLServer;
 
-    Connection connection = null;
+    private Connection connection = null;
+
+    private String notification;
 
     public ConnectionDataBaseSQLServer(){
 
         connectionDataBaseSQLServer = new CreateConnection();
 
         try {
-            connection = connectionDataBaseSQLServer.createConnection("estudiantesrp","estudiantesrp", "AndroidAppJ","163.178.173.148");
+            connection = connectionDataBaseSQLServer.createConnection("estudiantesrp","estudiantesrp", "AndroidAppJ","163.178.173.1484");
             //connection = connectionDataBaseSQLServer.createConnection("SA","Prograamigos1!", "UATDATABASE_MovilApp","192.168.43.248");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
-            e.printStackTrace();
+            notification = "No se pudo conectar con la base de datos del servidor de ubuntu, por lo que se conectará con la base de datos del servidor espejo";
+            try {
+                connection = connectionDataBaseSQLServer.createConnection("estudiantesrp","estudiantesrp", "AndroidAppJ","163.178.173.148");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
 
         if(connection==null) {
@@ -41,6 +51,10 @@ public class ConnectionDataBaseSQLServer {
 
         }
 
+    }
+
+    public String getNotification(){
+        return this.notification;
     }
 
     public String verifyUserInBD(String username, String password){
@@ -402,6 +416,35 @@ public class ConnectionDataBaseSQLServer {
             }
         }
 
+    }
+
+    public MirrorServer getMirrorServerByIpServer(String ipServer) {
+
+        String query = "Select m.ip, m.server_user, m.password,m.port,m.idServer, m.server_name  from  MirrorServer m, Server s where s.ip = '"+ipServer+"' and s.id_server = m.idServer";
+        MirrorServer server = null;
+        try {
+            //prepara la conexion;'
+            Statement statement = connection.createStatement();
+            //ejecuta el query
+            ResultSet resultSet = statement.executeQuery(query);
+
+            //obtengo los datos de la consulta
+            while (resultSet.next()) {
+                server = new MirrorServer();
+                server.setIp(resultSet.getString("ip"));
+                server.setUsername(resultSet.getString("server_user"));
+                server.setPassword(resultSet.getString("password"));
+                server.setPort(resultSet.getInt("port"));
+                server.setIdServer(resultSet.getInt("idServer"));
+                server.setServerName(resultSet.getString("server_name"));
+
+            }
+        } catch (SQLException e) {
+
+            System.out.print(e);
+
+        }
+        return server;
     }
 
 

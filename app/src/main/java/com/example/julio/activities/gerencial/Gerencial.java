@@ -177,24 +177,6 @@ public class Gerencial extends AppCompatActivity {
     }
 
 
-
-    /*public void showNotifications(Context mContext){
-        String tittle="";
-        String subject="Saturacion de memoria";
-        String body="Se ha llegado al limite de la memoria";
-
-        NotificationManager notif=(NotificationManager)getSystemService(mContext.NOTIFICATION_SERVICE);
-
-        Notification notification = new Notification.Builder(mContext)
-                .setContentTitle(subject).setContentText(body)
-                .setSmallIcon(R.drawable.ic_launcher_background).getNotification();
-
-        notification.flags |= notification.FLAG_AUTO_CANCEL;
-        notif.notify(0, notification);
-    }*/
-
-
-
     //--------------------------------------------------------------------------------------------//
 
 

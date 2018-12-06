@@ -2,6 +2,7 @@ package com.example.julio.management;
 
 import com.example.julio.objects.Audit;
 import com.example.julio.objects.Command;
+import com.example.julio.objects.MirrorServer;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -36,6 +37,8 @@ public class ConnectServerUbuntu implements Runnable{
 
     private String commandToExecute; // enter any command you need to execute
 
+    private String commandToExecuteInWindows;
+
     private String userServer; // enter any command you need to execute
 
     private String ipServer; // enter any command you need to execute
@@ -44,19 +47,17 @@ public class ConnectServerUbuntu implements Runnable{
 
     private String password;
 
+    private String notifications;
+
+    private MirrorServer mirrorServer;
+
     public ConnectServerUbuntu(String commandToExecute, String userServer, String ipServer, int portServer, String password){
         this.commandToExecute = commandToExecute;
-        this.userServer = userServer;
-        this.ipServer = ipServer;
-        this.portServer = portServer;
-        this.password = password;
-    }
 
-    public ConnectServerUbuntu(String commandToExecute){
-        this.commandToExecute = commandToExecute;
-    }
+        if(commandToExecute.split(" ")[0].equals("ls")){
+            this.commandToExecuteInWindows = "dir C:\\Users\\Administrator\\Desktop";
+        }
 
-    public ConnectServerUbuntu(String userServer, String ipServer, int portServer, String password){
         this.userServer = userServer;
         this.ipServer = ipServer;
         this.portServer = portServer;
@@ -67,10 +68,19 @@ public class ConnectServerUbuntu implements Runnable{
         this.commandToExecute = commandToExecute;
     }
 
+    public String getNotification(){
+        return this.notifications;
+    }
+
 
 
     @Override
     public void run() {
+        connectWithServer();
+    }
+
+
+    private void connectWithServer(){
 
         this.command = new Command(commandToExecute);
 
@@ -146,15 +156,99 @@ public class ConnectServerUbuntu implements Runnable{
                     System.out.println("exit-status: "+canalServidor.getExitStatus());
                     break;
                 }
-                try{Thread.sleep(1000);}catch(Exception ee){}
+
             }
             canalServidor.disconnect();
             session.disconnect();
 
 
         } catch (Exception e) {
-            System.out.print(e);
+            connectWithMirrorServer();
         }
 
     }
+
+    private void connectWithMirrorServer(){
+        notifications = "El servidor "+this.ipServer+" no se encuentra disponible, se conectará al servidor servidor espejo";
+
+        mirrorServer = connectionDataBaseSQLServer.getMirrorServerByIpServer(ipServer);
+
+        try {
+            JSch jsch = new JSch();
+
+            String host = mirrorServer.getUsername()+"@"+mirrorServer.getIp();// enter username and ipaddress for machine you need to connect
+
+            String user = host.substring(0, host.indexOf('@'));
+            host = host.substring(host.indexOf('@') + 1);
+
+            session = jsch.getSession(user, host, mirrorServer.getPort());
+
+            // username and password will be given via UserInfo interface.
+            MyUserInfo ui = new MyUserInfo();
+            ui.setPasswd(mirrorServer.getPassword());
+            session.setUserInfo(ui);
+            session.connect();
+
+            Channel canalServidor=session.openChannel("exec");
+            ((ChannelExec)canalServidor).setCommand(this.commandToExecuteInWindows);
+
+            canalServidor.setInputStream(null);
+
+            ((ChannelExec)canalServidor).setErrStream(System.err);
+
+            InputStream informacionDelServidor =canalServidor.getInputStream();
+
+            canalServidor.connect();
+
+            byte[] arregloBytes=new byte[1024];
+            while(true){
+                while (true) {
+                    while (informacionDelServidor.available() > 0) {
+                        int i = informacionDelServidor.read(arregloBytes, 0, 1024);
+                        if (i < 0) {
+                            break;
+                        }
+                        //meto el resultado de la ejecucion del comando en text
+                        String text = new String(arregloBytes, 0, i);
+                        String[] rowsText = text.split("\n");
+                        //este for lo que hace es omiter el encabezado de las consultas que lo tienen
+                        for (int j = 1; j<rowsText.length; j++) {
+                            lista1.add(rowsText[j]);
+                        }
+                        //cuando no hay encabezado, se usa este otro ciclo que tome desde la fina uno de resultados
+                        for (int j = 0; j<rowsText.length; j++) {
+                            lista0.add(rowsText[j]);
+                        }
+
+                    }
+                    if (canalServidor.isClosed()) {
+                        System.out.println("exit-status: " + canalServidor.getExitStatus());
+                        break;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception ee) {
+                    }
+
+
+                }
+                if(canalServidor.isClosed()){
+                    System.out.println("exit-status: "+canalServidor.getExitStatus());
+                    break;
+                }
+
+            }
+            canalServidor.disconnect();
+            session.disconnect();
+
+
+        } catch (Exception e) {
+            notifications = "No se logro conectar al servidor espejo, cancelando operacion";
+        }
+
+    }
+
+
+
+
 }

@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
         connectionDataBaseSQLServer = new ConnectionDataBaseSQLServer();
 
+        if(connectionDataBaseSQLServer.getNotification()!=null){
+            Toast.makeText(this, connectionDataBaseSQLServer.getNotification(), Toast.LENGTH_LONG).show();
+        }
+
         String rolName = connectionDataBaseSQLServer.verifyUserInBD(username, password);
 
         Intent i = null;
