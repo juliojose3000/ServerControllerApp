@@ -37,11 +37,11 @@ public class ConnectServerUbuntu implements Runnable{
 
     private String commandToExecute; // enter any command you need to execute
 
-    private String commandToExecuteInWindows;
-
     private String userServer; // enter any command you need to execute
 
     private String ipServer; // enter any command you need to execute
+
+    private String ipMirror;
 
     private int portServer; // enter any command you need to execute
 
@@ -49,15 +49,17 @@ public class ConnectServerUbuntu implements Runnable{
 
     private String notifications;
 
-    private MirrorServer mirrorServer;
+    public ConnectServerUbuntu(String commandToExecute, String userServer, String ipServer, int portServer, String password, String ipMirror){
+        this.commandToExecute = commandToExecute;
+        this.userServer = userServer;
+        this.ipServer = ipServer;
+        this.portServer = portServer;
+        this.password = password;
+        this.ipMirror = ipMirror;
+    }
 
     public ConnectServerUbuntu(String commandToExecute, String userServer, String ipServer, int portServer, String password){
         this.commandToExecute = commandToExecute;
-
-        if(commandToExecute.split(" ")[0].equals("ls")){
-            this.commandToExecuteInWindows = "dir C:\\Users\\Administrator\\Desktop";
-        }
-
         this.userServer = userServer;
         this.ipServer = ipServer;
         this.portServer = portServer;
@@ -145,11 +147,6 @@ public class ConnectServerUbuntu implements Runnable{
                         System.out.println("exit-status: " + canalServidor.getExitStatus());
                         break;
                     }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception ee) {
-                    }
-
 
                 }
                 if(canalServidor.isClosed()){
@@ -169,28 +166,26 @@ public class ConnectServerUbuntu implements Runnable{
     }
 
     private void connectWithMirrorServer(){
-        notifications = "El servidor "+this.ipServer+" no se encuentra disponible, se conectará al servidor servidor espejo";
-
-        mirrorServer = connectionDataBaseSQLServer.getMirrorServerByIpServer(ipServer);
+        notifications = "El servidor "+this.ipServer+" no se encuentra disponible, conectando al servidor servidor espejo";
 
         try {
             JSch jsch = new JSch();
 
-            String host = mirrorServer.getUsername()+"@"+mirrorServer.getIp();// enter username and ipaddress for machine you need to connect
+            String host = this.userServer+"@"+this.ipServer;// enter username and ipaddress for machine you need to connect
 
             String user = host.substring(0, host.indexOf('@'));
             host = host.substring(host.indexOf('@') + 1);
 
-            session = jsch.getSession(user, host, mirrorServer.getPort());
+            session = jsch.getSession(user, host, this.portServer);
 
             // username and password will be given via UserInfo interface.
             MyUserInfo ui = new MyUserInfo();
-            ui.setPasswd(mirrorServer.getPassword());
+            ui.setPasswd(this.password);
             session.setUserInfo(ui);
             session.connect();
 
             Channel canalServidor=session.openChannel("exec");
-            ((ChannelExec)canalServidor).setCommand(this.commandToExecuteInWindows);
+            ((ChannelExec)canalServidor).setCommand(this.commandToExecute);
 
             canalServidor.setInputStream(null);
 
@@ -225,11 +220,6 @@ public class ConnectServerUbuntu implements Runnable{
                         System.out.println("exit-status: " + canalServidor.getExitStatus());
                         break;
                     }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception ee) {
-                    }
-
 
                 }
                 if(canalServidor.isClosed()){

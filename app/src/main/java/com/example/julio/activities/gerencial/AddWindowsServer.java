@@ -60,9 +60,9 @@ public class AddWindowsServer extends AppCompatActivity {
         String ipMirror = this.ipMirror.getText().toString();
 
 
-        MirrorServer server = new MirrorServer(4, serverName, username, password, port, ipServer, ipMirror);
+        Server server = new Server(4, serverName, username, password, port, ipServer, ipMirror);
 
-        String result = connectionDataBaseSQLServer.insertMirrorServer(server);
+        String result = connectionDataBaseSQLServer.insertServer(server);
 
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
 

@@ -16,11 +16,7 @@
 
     <item
         android:id="@+id/item_async_task"
-        android:title="Tarea en segundo plano" />
-
-    <item
-        android:id="@+id/item_show_notifications"
-        android:title="Mostrar norificacion" />
+        android:title="Iniciar verificacion de memoria" />
 
     <item
         android:id="@+id/item_delete_server"

@@ -119,10 +119,12 @@ public class ConnectionDataBaseSQLServer {
             //ejecuta el query
             ResultSet resultSet = statement.executeQuery(query);
 
+
             //obtengo los datos de la consulta
             while(resultSet.next()){
                 listServers.add(resultSet.getString("server_name"));
             }
+
         } catch (SQLException e) {
 
             System.out.print(e);
@@ -134,7 +136,7 @@ public class ConnectionDataBaseSQLServer {
 
     public Server getServerByName(String serverName) {
 
-        String query = "Select ip, server_user, password,port,id_server, server_name  from  dbo.Server where server_name = '" + serverName+"'";
+        String query = "Select ip, server_user, password,port,id_server, server_name, ip_mirror  from  dbo.Server where server_name = '" + serverName+"'";
         Server server = null;
         try {
             //prepara la conexion;'
@@ -151,6 +153,7 @@ public class ConnectionDataBaseSQLServer {
                 server.setPort(resultSet.getInt("port"));
                 server.setIdServer(resultSet.getInt("id_server"));
                 server.setServerName(resultSet.getString("server_name"));
+                server.setIpMirror(resultSet.getString("ip_mirror"));
 
             }
         } catch (SQLException e) {
@@ -158,17 +161,50 @@ public class ConnectionDataBaseSQLServer {
             System.out.print(e);
 
         }
+
+        if(server==null){
+
+
+            query = "Select ip, server_user, password,port,id_server, server_name, ip_mirror  from  dbo.WindowsServer where server_name = '" + serverName+"'";
+            try {
+                //prepara la conexion;'
+                Statement statement = connection.createStatement();
+                //ejecuta el query
+                ResultSet resultSet = statement.executeQuery(query);
+
+                //obtengo los datos de la consulta
+                while (resultSet.next()) {
+                    server = new Server();
+                    server.setIp(resultSet.getString("ip"));
+                    server.setUsername(resultSet.getString("server_user"));
+                    server.setPassword(resultSet.getString("password"));
+                    server.setPort(resultSet.getInt("port"));
+                    server.setIdServer(resultSet.getInt("id_server"));
+                    server.setServerName(resultSet.getString("server_name"));
+
+                }
+            } catch (SQLException e) {
+
+                System.out.print(e);
+
+            }
+
+
+        }
+
         return server;
     }
 
     public String deleteServerByName(String serverName) {
 
         String query="delete Server where server_name='"+serverName+"';";
+        String query2="delete WindowsServer where server_name='"+serverName+"';";
 
         try {
             Statement statement= connection.createStatement();
             //ejecuta la consulta y obtiene resultado
             statement.executeUpdate(query);
+            statement.executeUpdate(query2);
 
             return "Servidor ingresado correctamente";
 
@@ -180,7 +216,7 @@ public class ConnectionDataBaseSQLServer {
 
     public Server getServerById(int idServer) {
 
-        String query = "Select ip, server_user, password,port,id_server, server_name  from  dbo.Server where id_server = '" + idServer+"'";
+        String query = "Select ip, server_user, password,port,id_server, server_name, ip_mirror  from  dbo.Server where id_server = '" + idServer+"'";
         Server server = null;
         try {
             //prepara la conexion;'
@@ -197,6 +233,8 @@ public class ConnectionDataBaseSQLServer {
                 server.setPort(resultSet.getInt("port"));
                 server.setIdServer(resultSet.getInt("id_server"));
                 server.setServerName(resultSet.getString("server_name"));
+                server.setIpMirror(resultSet.getString("ip_mirror"));
+
 
             }
         } catch (SQLException e) {
@@ -208,8 +246,12 @@ public class ConnectionDataBaseSQLServer {
     }
 
     public String insertServer(Server server){
-        String query= "Insert into   ["+dataBaseName+"].[dbo].[Server] (ip,server_user,password,port,server_name)" +
-                " values ('"+server.getIp()+"','"+server.getUsername()+"','"+server.getPassword()+"',"+server.getPort()+",'"+server.getServerName()+"')";
+        String ipMirror = server.getIpMirror();
+        if(ipMirror==null){
+            ipMirror = "";
+        }
+        String query= "Insert into   ["+dataBaseName+"].[dbo].[Server] (ip,server_user,password,port,server_name, ip_mirror)" +
+                " values ('"+server.getIp()+"','"+server.getUsername()+"','"+server.getPassword()+"',"+server.getPort()+",'"+server.getServerName()+"','"+ipMirror+"')";
 
         try {
             Statement statement= connection.createStatement();
@@ -228,7 +270,7 @@ public class ConnectionDataBaseSQLServer {
 
 
 
-    public String insertMirrorServer(MirrorServer server){
+    public String insertMirrorServer(Server server){
         String query= "Insert into   ["+dataBaseName+"].[dbo].[WindowsServer] (ip,server_user,password,port,ip_mirror,server_name)" +
                 " values ('"+server.getIp()+"','"+server.getUsername()+"','"+server.getPassword()+"',"+server.getPort()+",'"+server.getIpMirror()+"','"+server.getServerName()+"')";
 

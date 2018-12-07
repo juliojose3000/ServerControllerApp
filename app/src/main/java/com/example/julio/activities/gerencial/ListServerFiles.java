@@ -34,6 +34,10 @@ public class ListServerFiles extends AppCompatActivity {
 
     private String ip;
 
+    private String ipMirror;
+
+    private String command;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +53,17 @@ public class ListServerFiles extends AppCompatActivity {
 
         ip = extras.getString("ip");
 
+        ipMirror = extras.getString("ipMirror");
+
         listaNombreFiles = new ArrayList<>();
 
-        connectionServer = new ConnectServerUbuntu("ls -l /home/"+username+"/Desktop/", username, ip, port, password);
+        if(ipMirror==null){
+            command = "ls -l /home/"+username+"/Desktop/";
+        }else{
+            command = "dir C:\\Users\\Administrator\\Desktop";
+        }
+
+        connectionServer = new ConnectServerUbuntu(command, username, ip, port, password, ipMirror);
         connectionServer.run();
         getFileNameFromQuery();
 

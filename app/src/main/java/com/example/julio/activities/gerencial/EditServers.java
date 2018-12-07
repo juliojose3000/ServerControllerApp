@@ -22,6 +22,8 @@ public class EditServers extends AppCompatActivity{
 
         private EditText ip;
 
+        private EditText ipMirror;
+
         private EditText serverName;
 
         private int idServer;
@@ -43,6 +45,7 @@ public class EditServers extends AppCompatActivity{
         port = findViewById(R.id.editext_port2);
         ip = findViewById(R.id.editext_serverip2);
         serverName = findViewById(R.id.editext_serverName2);
+        ipMirror = findViewById(R.id.editext_ipMirror);
         connectionDataBaseSQLServer = new ConnectionDataBaseSQLServer();
 
         idServer = extras.getInt("idServer");
@@ -57,6 +60,7 @@ public class EditServers extends AppCompatActivity{
 
         ip.setText(server.getIp());
 
+        ipMirror.setText(server.getIpMirror());
 
         serverName.setText(server.getServerName());
 

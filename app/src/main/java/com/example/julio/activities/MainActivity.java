@@ -13,9 +13,6 @@ import com.example.julio.activities.tecnico.Tecnico;
 import com.example.julio.management.ConnectionDataBaseSQLServer;
 import cr.ac.ucr.teamjjja.sistemasoperativos.servercontroller.R;
 
-//Comentario de prueba
-//comentario de juan XD
-//comentario de jenkins
 public class MainActivity extends AppCompatActivity {
 
     EditText username;

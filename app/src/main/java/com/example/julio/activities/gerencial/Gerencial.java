@@ -39,6 +39,8 @@ public class Gerencial extends AppCompatActivity {
 
     private String ip;
 
+    private String ipMirror;
+
     private Server server;
 
     private ConnectionDataBaseSQLServer connectionDataBaseSQLServer;
@@ -77,6 +79,8 @@ public class Gerencial extends AppCompatActivity {
                 password = server.getPassword();
 
                 port = server.getPort();
+
+                ipMirror = server.getIpMirror();
             }
 
         });
@@ -152,6 +156,7 @@ public class Gerencial extends AppCompatActivity {
         i.putExtra("password",password);
         i.putExtra("port",port);
         i.putExtra("ip",ip);
+        i.putExtra("ipMirror",ipMirror);
 
         startActivity(i);
 
