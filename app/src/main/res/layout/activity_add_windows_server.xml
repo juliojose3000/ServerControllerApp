@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gerencial"
+    tools:context="com.example.julio.activities.gerencial.AddWindowsServer"
+    tools:layout_editor_absoluteY="73dp">
+
+    <EditText
+        android:id="@+id/editext_port_w"
+        android:layout_width="169dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:ems="10"
+        android:hint="Port"
+        android:inputType="textPersonName"
+        android:text="22"
+        app:layout_constraintBottom_toTopOf="@+id/editext_password_w"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editext_serverip_w" />
+
+    <EditText
+        android:id="@+id/editext_serverip_w"
+        android:layout_width="172dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:hint="Server IP"
+        android:inputType="textPersonName"
+        android:text="192.168.1.8"
+        app:layout_constraintBottom_toTopOf="@+id/editext_port_w"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editext_username_w" />
+
+    <EditText
+        android:id="@+id/editext_ip_mirror_w"
+        android:layout_width="166dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="23dp"
+        android:ems="10"
+        android:hint="ip mirror"
+        android:inputType="textPersonName"
+        android:text="198.168.1.1"
+        app:layout_constraintBottom_toTopOf="@+id/button_connect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editext_password_w" />
+
+    <EditText
+        android:id="@+id/editext_password_w"
+        android:layout_width="166dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="22dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        android:text="admindep"
+        app:layout_constraintBottom_toTopOf="@+id/editext_ip_mirror_w"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editext_port_w" />
+
+    <EditText
+        android:id="@+id/editext_serverName_w"
+        android:layout_width="172dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:text="Developer Server"
+        app:layout_constraintBottom_toTopOf="@+id/editext_username_w"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/editext_username_w"
+        android:layout_width="172dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:text="julio"
+        app:layout_constraintBottom_toTopOf="@+id/editext_serverip_w"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editext_serverName_w" />
+
+    <Button
+        android:id="@+id/button_connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginStart="3dp"
+        android:onClick="addServer"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_cancel"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editext_ip_mirror_w" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Please put your server details"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toTopOf="@+id/editext_serverName_w"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:onClick="cancel"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_connect" />
+
+</android.support.constraint.ConstraintLayout>

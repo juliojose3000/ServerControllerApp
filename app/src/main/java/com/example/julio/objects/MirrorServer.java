@@ -14,17 +14,28 @@ public class MirrorServer {
 
     private String ip;
 
+    private String ipMirror;
+
     public MirrorServer(){
 
     }
 
-    public MirrorServer(int idServer, String serverName, String username, String password, int port, String ip) {
+    public MirrorServer(int idServer, String serverName, String username, String password, int port, String ip, String ipMirror) {
         this.idServer=idServer;
         this.serverName=serverName;
         this.username = username;
         this.password = password;
         this.port = port;
         this.ip = ip;
+        this.ipMirror = ipMirror;
+    }
+
+    public String getIpMirror() {
+        return ipMirror;
+    }
+
+    public void setIpMirror(String ipMirror) {
+        this.ipMirror = ipMirror;
     }
 
     public String getUsername() {

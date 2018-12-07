@@ -115,9 +115,15 @@ public class Gerencial extends AppCompatActivity {
             showNotifications.setContext(Gerencial.this);
             showNotifications.execute(username, ip, ""+port, password);
 
-        }else if(id == R.id.item_show_notifications){
+        }else if(id == R.id.item_add_windows_server){
 
+            Intent i = new Intent(Gerencial.this, AddWindowsServer.class);
+            startActivity(i);
 
+        }else if(id == R.id.item_delete_server){
+
+            connectionDataBaseSQLServer.deleteServerByName(this.server.getServerName());
+            fillServerInListView();
 
         }
 

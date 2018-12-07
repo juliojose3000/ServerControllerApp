@@ -161,6 +161,23 @@ public class ConnectionDataBaseSQLServer {
         return server;
     }
 
+    public String deleteServerByName(String serverName) {
+
+        String query="delete Server where server_name='"+serverName+"';";
+
+        try {
+            Statement statement= connection.createStatement();
+            //ejecuta la consulta y obtiene resultado
+            statement.executeUpdate(query);
+
+            return "Servidor ingresado correctamente";
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return "Error al ingresar el servidor. Intente de nuevo";
+        }
+    }
+
     public Server getServerById(int idServer) {
 
         String query = "Select ip, server_user, password,port,id_server, server_name  from  dbo.Server where id_server = '" + idServer+"'";
@@ -193,6 +210,27 @@ public class ConnectionDataBaseSQLServer {
     public String insertServer(Server server){
         String query= "Insert into   ["+dataBaseName+"].[dbo].[Server] (ip,server_user,password,port,server_name)" +
                 " values ('"+server.getIp()+"','"+server.getUsername()+"','"+server.getPassword()+"',"+server.getPort()+",'"+server.getServerName()+"')";
+
+        try {
+            Statement statement= connection.createStatement();
+            //ejecuta la consulta y obtiene resultado
+            statement.executeUpdate(query);
+
+            return "Servidor ingresado correctamente";
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return "Error al ingresar el servidor. Intente de nuevo";
+        }
+    }
+
+
+
+
+
+    public String insertMirrorServer(MirrorServer server){
+        String query= "Insert into   ["+dataBaseName+"].[dbo].[WindowsServer] (ip,server_user,password,port,ip_mirror,server_name)" +
+                " values ('"+server.getIp()+"','"+server.getUsername()+"','"+server.getPassword()+"',"+server.getPort()+",'"+server.getIpMirror()+"','"+server.getServerName()+"')";
 
         try {
             Statement statement= connection.createStatement();

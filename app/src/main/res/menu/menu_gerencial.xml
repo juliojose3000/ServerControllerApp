@@ -4,7 +4,11 @@
 
     <item
         android:id="@+id/item_add_server"
-        android:title="Add server" />
+        android:title="Add ubuntu server" />
+
+    <item
+        android:id="@+id/item_add_windows_server"
+        android:title="Add windows server" />
 
     <item
         android:id="@+id/item_ftp_transfer"
@@ -17,5 +21,9 @@
     <item
         android:id="@+id/item_show_notifications"
         android:title="Mostrar norificacion" />
+
+    <item
+        android:id="@+id/item_delete_server"
+        android:title="Borrar server" />
 
 </menu>
