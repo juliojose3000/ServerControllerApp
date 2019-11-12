@@ -53,10 +53,6 @@ public class ConnectionDataBaseSQLServer {
 
     }
 
-    public String getNotification(){
-        return this.notification;
-    }
-
     public String verifyUserInBD(String username, String password){
 
             String tableName = "Users";
